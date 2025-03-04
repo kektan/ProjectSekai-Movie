@@ -41,20 +41,6 @@ subs {
     merge {
         from(get("dialogue"))
 
-        if (propertyExists("OP")) {
-            from(get("OP")) {
-                syncSourceLine("sync")
-                syncTargetLine("opsync")
-            }
-        }
-
-        if (propertyExists("ED")) {
-            from(get("ED")) {
-                syncSourceLine("sync")
-                syncTargetLine("edsync")
-            }
-        }
-
         fromIfPresent(get("extra"), ignoreMissingFiles = true)
         fromIfPresent(getList("INS"), ignoreMissingFiles = true)
         fromIfPresent(getList("TS"), ignoreMissingFiles = true)
@@ -175,80 +161,5 @@ subs {
         }
 
         out(get("muxout"))
-    }
-
-    // =================================================================================================================
-    // NCOP/EDs
-    tasks(getList("ncs")) {
-        merge {
-            from(get("ncsubs"))
-
-            includeExtraData(false)
-            includeProjectGarbage(false)
-
-            scriptInfo {
-                title = get("group").get()
-                originalScript = get("group").get()
-                scaledBorderAndShadow = true
-            }
-        }
-
-        val cleanncmerge by task<ASS> {
-            from(merge.item())
-            // ass { events.lines.removeIf { it.isKaraTemplate() or it.isBlank() } }
-            ass { events.lines.removeIf { it.isBlank() } }
-        }
-
-        chapters {
-            from(cleanncmerge.item())
-            chapterMarker("ncchapter")
-        }
-
-        mux {
-            title(get("title"))
-
-            from(get("ncpremux")) {
-                tracks {
-                    include(track.type == TrackType.VIDEO || track.type == TrackType.AUDIO)
-                }
-
-                video {
-                    lang("jpn")
-                    name(get("vtrack"))
-                    default(true)
-                }
-                audio {
-                    lang("jpn")
-                    name(get("atrack"))
-                    default(true)
-                }
-                includeChapters(false)
-                attachments { include(false) }
-            }
-
-            from(cleanncmerge.item()) {
-                tracks {
-                    lang("eng")
-                    name(get("strack_reg"))
-                    default(true)
-                    forced(false)
-                    compression(CompressionType.ZLIB)
-                }
-            }
-
-            chapters(chapters.item()) { lang("eng") }
-
-            skipUnusedFonts(true)
-
-            attach(get("ncfonts")) {
-                includeExtensions("ttf", "otf")
-            }
-
-            attach(get("common_fonts")) {
-                includeExtensions("ttf", "otf")
-            }
-
-            out(get("ncmuxout"))
-        }
     }
 }
