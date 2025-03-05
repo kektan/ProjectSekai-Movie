@@ -1,11 +1,11 @@
 [![cover][cover-art]][anidb-id]
 
-| Anime Information  |                                                         |
-| ------------------ | ------------------------------------------------------- |
-| **Title**          | COLORFUL STAGE! The Movie: A Miku Who Can't Sing        |
-| **Title (romaji)** | Project SEKAI the Movie: Kowareta SEKAI to Utaenai MIKU |
-| **TMDB ID**        | [1322752][tmdb-id]                                      |
-| **AniDB ID**       | [18780][anidb-id]                                       |
+| Anime Information  |                                                                           |
+| ------------------ | ------------------------------------------------------------------------- |
+| **Title**          | Project SEKAI the Movie: The Fragmented SEKAI and The MIKU Who Can't Sing |
+| **Title (romaji)** | Project SEKAI the Movie: Kowareta SEKAI to Utaenai MIKU                   |
+| **TMDB ID**        | [1322752][tmdb-id]                                                        |
+| **AniDB ID**       | [18780][anidb-id]                                                         |
 
 ### Staff
 
