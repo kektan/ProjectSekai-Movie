@@ -86,6 +86,7 @@ subs {
     // Finally, mux following the conventions listed here: https://thewiki.moe/advanced/muxing/#correct-tagging
     mux {
         title(get("title"))
+        forceCRC(get("crc"))
 
         // Optionally specify mkvmerge version to use
         if (propertyExists("mkvmerge")) {
